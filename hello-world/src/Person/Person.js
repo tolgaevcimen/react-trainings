@@ -1,7 +1,11 @@
 import React from 'react';
 
-const person = () => {
-    return <div>I'm a person</div>
+const person = (props) => {
+    return (
+        <div>
+            I'm {props.name}, I'm {props.age} years old.
+            <p>{props.children}</p>
+        </div>)
 }
 
 export default person;
