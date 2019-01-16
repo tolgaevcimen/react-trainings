@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Radium, { StyleRoot } from 'radium'
 import Person from './Person/Person';
 
 class App extends Component {
@@ -9,7 +10,7 @@ class App extends Component {
       { id: '2', name: 'Jane', age: 33 },
       { id: '3', name: 'Jethro', age: 31 }
     ],
-    showPeople: false
+    showPeople: true
   }
 
   deletePersonHandler = (personIndex) => {
@@ -44,11 +45,16 @@ class App extends Component {
 
   render() {
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid green',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
     }
 
     let people = null;
@@ -65,17 +71,25 @@ class App extends Component {
           })}
         </div>
       )
+
+      style.backgroundColor = 'red';
+      style[':hover'] = {
+        backgroundColor: 'salmon',
+        color: 'black'
+      }
     }
 
     return (
-      <div className="App">
-        <h1>Hi, react world!</h1>
-        <p>This is a paragraph</p>
-        {people}
-        <button onClick={this.togglePeopleHandler} style={style}>Toggle People</button>
-      </div>
+      <StyleRoot>
+        <div className="App">
+          <h1>Hi, react world!</h1>
+          <p>This is a paragraph</p>
+          {people}
+          <button onClick={this.togglePeopleHandler} style={style}>Toggle People</button>
+        </div>
+      </StyleRoot>
     );
   }
 }
 
-export default App;
+export default Radium(App);
