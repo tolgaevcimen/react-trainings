@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import classes from './App.css';
-import Person from './Person/Person';
+import Person from '../components/Persons/Person/Person';
 
 class App extends Component {
   state = {
@@ -43,16 +43,8 @@ class App extends Component {
   }
 
   render() {
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid green',
-      padding: '8px',
-      cursor: 'pointer'
-    }
-
     let people = null;
+    let colorClass = '';
     if (this.state.showPeople) {
       people = (
         <div>
@@ -67,7 +59,7 @@ class App extends Component {
         </div>
       )
 
-      style.backgroundColor = 'red';
+      colorClass = classes.Red;
     }
 
     return (
@@ -75,7 +67,7 @@ class App extends Component {
           <h1>Hi, react world!</h1>
           <p>This is a paragraph</p>
           {people}
-          <button onClick={this.togglePeopleHandler} style={style}>Toggle People</button>
+          <button onClick={this.togglePeopleHandler} className={colorClass}>Toggle People</button>
         </div>
     );
   }
