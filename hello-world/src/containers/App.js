@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classes from './App.css';
-import Person from '../components/Persons/Person/Person';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
   state = {
@@ -47,16 +48,9 @@ class App extends Component {
     let colorClass = '';
     if (this.state.showPeople) {
       people = (
-        <div>
-          {this.state.people.map((p, index) => {
-            return <Person 
-              key={p.id}
-              name={p.name} 
-              age={p.age} 
-              // click={() => this.deletePersonHandler(index)}
-              change={(event) => this.nameChangeHandler(event, p.id)}  />
-          })}
-        </div>
+        <Persons 
+        change={this.nameChangeHandler} 
+        people={this.state.people} />
       )
 
       colorClass = classes.Red;
@@ -64,10 +58,10 @@ class App extends Component {
 
     return (
         <div className={classes.App}>
-          <h1>Hi, react world!</h1>
-          <p>This is a paragraph</p>
+          <Cockpit
+            clicked={this.togglePeopleHandler}
+            colorClass={colorClass} />
           {people}
-          <button onClick={this.togglePeopleHandler} className={colorClass}>Toggle People</button>
         </div>
     );
   }
