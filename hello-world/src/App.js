@@ -46,18 +46,22 @@ class App extends Component {
       cursor: 'pointer'
     }
 
+    let people = null;
+    if(this.state.showPeople) {
+      people = (
+        <div>
+          {this.state.people.map(p=>{
+            return <Person name={p.name} age={p.age}  change={this.nameChangeHandler}/>
+          })}
+        </div>
+      )
+    }
+
     return (
       <div className="App">
         <h1>Hi, react world!</h1>
         <p>This is a paragraph</p>
-        {
-          this.state.showPeople === true ?
-            <div>
-              <Person name={this.state.people[0].name} age={this.state.people[0].age} change={this.nameChangeHandler} />
-              <Person name={this.state.people[1].name} age={this.state.people[1].age} click={() => this.switchNameHandler("Harp")} />
-              <Person name={this.state.people[2].name} age={this.state.people[2].age} click={this.switchNameHandler.bind(this, "Dillion")} />
-            </div> : null
-        }
+        {people}
         <button onClick={this.switchNameHandler.bind(this, "Jillian")} style={style}>Switch name</button>
         <button onClick={this.togglePeopleHandler} style={style}>Toggle People</button>
       </div>
